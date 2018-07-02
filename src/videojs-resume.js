@@ -23,10 +23,10 @@ class ResumeButton extends Button {
   }
 
   handleClick() {
-    this.player_.resumeModal.close();
     this.player_.currentTime(this.resumeFromTime);
     this.player_.play();
     this.player_.trigger('resumevideo');
+    this.player_.resumeModal.close();
   }
 
   handleKeyPress(event) {
@@ -130,9 +130,7 @@ const Resume = function(options) {
   let playbackOffset = options.playbackOffset || 0;
   let key = 'videojs-resume:' + videoId;
 
-  this.on('timeupdate', function() {
-    store.set(key, this.currentTime());
-  });
+
 
   this.on('ended', function() {
     store.remove(key);
@@ -156,7 +154,12 @@ const Resume = function(options) {
         key
       });
     }
+
+    // update timestamp
+    this.on('timeupdate', function() {
+      store.set(key, this.currentTime());
+    });
   });
 };
 
-videojs.plugin('Resume', Resume);
+videojs.registerPlugin('Resume', Resume);

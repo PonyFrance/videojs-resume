@@ -50,10 +50,10 @@ var ResumeButton = (function (_Button) {
   }, {
     key: 'handleClick',
     value: function handleClick() {
-      this.player_.resumeModal.close();
       this.player_.currentTime(this.resumeFromTime);
       this.player_.play();
       this.player_.trigger('resumevideo');
+      this.player_.resumeModal.close();
     }
   }, {
     key: 'handleKeyPress',
@@ -191,10 +191,6 @@ var Resume = function Resume(options) {
   var playbackOffset = options.playbackOffset || 0;
   var key = 'videojs-resume:' + videoId;
 
-  this.on('timeupdate', function () {
-    _store2['default'].set(key, this.currentTime());
-  });
-
   this.on('ended', function () {
     _store2['default'].remove(key);
   });
@@ -217,10 +213,15 @@ var Resume = function Resume(options) {
         key: key
       });
     }
+
+    // update timestamp
+    this.on('timeupdate', function () {
+      _store2['default'].set(key, this.currentTime());
+    });
   });
 };
 
-_videoJs2['default'].plugin('Resume', Resume);
+_videoJs2['default'].registerPlugin('Resume', Resume);
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}]},{},[1]);
