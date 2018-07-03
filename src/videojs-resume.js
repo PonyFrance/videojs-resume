@@ -102,6 +102,12 @@ class ResumeModal extends ModalDialog {
     });
   }
 
+  dispose() {
+    if (this._player) {
+      super.dispose()
+    }
+  }
+
   buildCSSClass() {
     return `vjs-resume-modal ${super.buildCSSClass()}`;
   }

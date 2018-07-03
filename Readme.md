@@ -1,3 +1,13 @@
+# Fork of VideoJS Resume
+
+Only support videojs7.
+
+## Build
+
+```
+npm run build && npm run build-dist
+```
+
 # VideoJS Resume
 
 A VideoJS plugin to resume playback of a video at the point in time it was left.

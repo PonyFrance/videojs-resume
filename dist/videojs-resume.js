@@ -158,6 +158,13 @@ var ResumeModal = (function (_ModalDialog) {
   }
 
   _createClass(ResumeModal, [{
+    key: 'dispose',
+    value: function dispose() {
+      if (this._player) {
+        _get(Object.getPrototypeOf(ResumeModal.prototype), 'dispose', this).call(this);
+      }
+    }
+  }, {
     key: 'buildCSSClass',
     value: function buildCSSClass() {
       return 'vjs-resume-modal ' + _get(Object.getPrototypeOf(ResumeModal.prototype), 'buildCSSClass', this).call(this);
